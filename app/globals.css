@@ -311,3 +311,12 @@ kbd { font: 10px var(--mono); color: var(--muted); border: 1px solid #3c4748; bo
 .library-tools { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 12px; }
 .library-tools select { font: inherit; color: var(--text); background: var(--panel); padding: 8px; border: 1px solid var(--line); border-radius: 4px; }
 .code-library pre { overflow: auto; max-height: 23rem; padding: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 5px; font: 13px/1.6 var(--mono); }
+
+.code-library .hljs-keyword, .code-library .hljs-meta { color: #b9aaf0; }
+.code-library .hljs-string, .code-library .hljs-regexp { color: #a0e6c7; }
+.code-library .hljs-title, .code-library .hljs-built_in, .code-library .hljs-type { color: #9dc9ec; }
+.code-library .hljs-number, .code-library .hljs-literal { color: #ecc092; }
+.code-library .hljs-comment { color: #99aaa3; font-style: italic; }
+.reader-methods { margin: 12px 0; }
+.reader-methods div { padding: 8px 0; border-bottom: 1px solid var(--line); }
+.reader-methods dt { overflow-wrap: anywhere; color: var(--mint); }
