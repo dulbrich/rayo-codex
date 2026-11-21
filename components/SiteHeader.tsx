@@ -6,7 +6,7 @@ type Props = { section: "reader" | "about"; onJump?: () => void; shortcut?: stri
 export default function SiteHeader({ section, onJump, shortcut }: Props) {
   return <header className="site-header">
     <Link href="/" className="brand" aria-label="Rayo Codex reader">
-      <img src="/icon.png" width="34" height="34" alt="" />
+      <img src="/icon.svg" width="34" height="34" alt="" />
       <span>Rayo Codex</span>
     </Link>
     <nav className="site-tabs" aria-label="Main navigation">
