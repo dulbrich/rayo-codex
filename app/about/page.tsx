@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import hljs from "highlight.js/lib/common";
 import CodeLibrary from "@/components/CodeLibrary";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -16,17 +17,18 @@ import { piDecimalDigits } from "@/lib/pi";
 export const metadata: Metadata = { title: "About the word" };
 
 const examples = [
-  { language: "JavaScript", file: "codex.mjs", command: "node codex.mjs" },
-  { language: "Python", file: "codex.py", command: "python3 codex.py" },
-  { language: "Rust", file: "codex.rs", command: "rustc codex.rs -o codex && ./codex" },
-  { language: "C++", file: "codex.cpp", command: "c++ -std=c++17 codex.cpp -o codex && ./codex" },
+  { language: "JavaScript", file: "codex.mjs", grammar: "javascript", command: "node codex.mjs 1 3" },
+  { language: "Python", file: "codex.py", grammar: "python", command: "python3 codex.py 1 3" },
+  { language: "Rust", file: "codex.rs", grammar: "rust", command: "rustc codex.rs -o codex && ./codex 1 3" },
+  { language: "C++", file: "codex.cpp", grammar: "cpp", command: "c++ -std=c++17 codex.cpp -o codex && ./codex 1 3" },
 ];
 
 export default async function About() {
-  const samples = await Promise.all(examples.map(async example => ({
-    ...example,
-    code: await readFile(path.join(process.cwd(), "examples", example.file), "utf8"),
-  })));
+  const samples = await Promise.all(examples.map(async example => {
+    const code = await readFile(path.join(process.cwd(), "examples", example.file), "utf8");
+    const highlighted = hljs.highlight(code, { language: example.grammar }).value;
+    return { ...example, code, highlighted };
+  }));
   const seed = piDecimalDigits(40).slice(0, 8);
   const pairs = seed.match(/../g) ?? [];
   return <>
