@@ -8,10 +8,10 @@ David and Harvey wanted to invent the longest word they could imagine and still 
 
 - Onsets: `LMNRSVZFKT`
 - Vowels: `AEIOU`
-- Codas: `NR`
+- Codas: `NLKSTFMPDR` (index by the sum of the two digits modulo 10)
 - A phrase is 4 syllables, a verse is 10 phrases, a chapter is 100 verses, and a volume is 1,000 chapters.
 - Navigation is 1-based. The practical interactive archive covers the first 100,000 syllables (300,000 letters), not the entire mathematical word.
-- The example **Volume 1 / Chapter 3 / Verse 17 / Phrase 4** decodes to **SAR · RER · KIR · RON**.
+- The example **Volume 1 / Chapter 3 / Verse 17 / Phrase 4** decodes to **SAF · REM · KIS · ROR**.
 
 ## Reading
 

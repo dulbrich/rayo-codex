@@ -5,7 +5,7 @@ import ChapterTrace from "@/components/ChapterTrace";
 import SiteHeader from "@/components/SiteHeader";
 import { INDEXED_CHAPTERS, OPENING, passageHref } from "@/lib/book";
 import {
-  CHAPTERS_PER_VOLUME, MAX_LETTERS, MAX_SYLLABLES, ONSETS, PHRASES_PER_VERSE,
+  CHAPTERS_PER_VOLUME, MAX_LETTERS, MAX_SYLLABLES, CODAS, ONSETS, PHRASES_PER_VERSE,
   SYLLABLES_PER_PHRASE, VERSES_PER_CHAPTER, syllableForPair,
 } from "@/lib/codex";
 import { piDecimalDigits } from "@/lib/pi";
@@ -36,7 +36,7 @@ export default function About() {
           {pairs.map((pair, i) => <div key={i}><strong>{pair}</strong><ArrowDown aria-hidden="true" />
             <span lang="art">{syllableForPair(Number(pair)).toLowerCase()}</span></div>)}
         </figure>
-        <p>The first digit picks an opening consonant from <span className="inline-code">{ONSETS.split("").join(" ")}</span>, counting from zero. The second digit picks the vowel. The pairs 0–1, 2–3, 4–5, 6–7 and 8–9 give A, E, I, O and U in that order. An even second digit ends in N and an odd one ends in R. For example, 14 gives M + I + N.</p>
+        <p>The first digit picks an opening consonant from <span className="inline-code">{ONSETS.split("").join(" ")}</span>, counting from zero. The second digit picks the vowel. The pairs 0–1, 2–3, 4–5, 6–7 and 8–9 give A, E, I, O and U in that order. To find the ending, add the two digits and use the last digit of the sum to count from zero in <span className="inline-code">{CODAS.split("").join(" ")}</span>. For 14, the sum is 5, so the syllable ends in F and sounds like “mif.”</p>
         <p>This consonant–vowel–consonant pattern gives every piece a sound. The same digits always give the same syllables.</p>
         <Link className="text-button" href={passageHref(OPENING, true)}>Try the opening phrase <ArrowRight /></Link>
       </section>

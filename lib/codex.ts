@@ -1,7 +1,7 @@
-/** Public Rayo Codex language specification, v1. */
+/** Public Rayo Codex language specification, v2. */
 export const ONSETS = "LMNRSVZFKT";
 export const VOWELS = "AEIOU";
-export const CODAS = "NR";
+export const CODAS = "NLKSTFMPDR";
 export const MAX_SYLLABLES = 100_000;
 export const MAX_LETTERS = MAX_SYLLABLES * 3;
 export const MAX_LETTER_REQUEST = 360;
@@ -31,7 +31,9 @@ export function isAddressArchived(a: Address): boolean {
 }
 export function syllableForPair(number: number): string {
   if (!Number.isInteger(number) || number < 0 || number > 99) throw new RangeError("Expected a pair from 00 to 99");
-  return ONSETS[Math.floor(number/10)] + VOWELS[Math.floor((number%10)/2)] + CODAS[number%2];
+  const tens = Math.floor(number / 10);
+  const ones = number % 10;
+  return ONSETS[tens] + VOWELS[Math.floor(ones / 2)] + CODAS[(tens + ones) % CODAS.length];
 }
 export function syllableAt(digits: string, position: number): string {
   if (!Number.isSafeInteger(position) || position < 1 || position > MAX_SYLLABLES) throw new RangeError("Syllable out of archive bounds");
