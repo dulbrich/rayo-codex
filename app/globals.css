@@ -304,3 +304,6 @@ kbd { font: 10px var(--mono); color: var(--muted); border: 1px solid #3c4748; bo
   .pager-inner { min-height: 47px; }
   .reader-dialog { max-height: 95dvh; }
 }
+
+.shorthand-note { display: flex; align-items: center; gap: 14px; }
+.shorthand-note img { flex: none; }

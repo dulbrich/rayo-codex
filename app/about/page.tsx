@@ -27,6 +27,7 @@ export default function About() {
         <h2>A word by David and Harvey</h2>
         <p>David and his son Harvey set out to invent the longest word they could imagine. They wanted to be able to say it out loud, even if they could only ever speak a small part of it.</p>
         <p>They chose Rayo’s number as its length in letters. The word means <em>“something specific to happen.”</em> The digits of π determine how it sounds.</p>
+        <p className="shorthand-note"><img src="/icon.svg" width="48" height="48" alt="" /><span>Harvey invented a shorthand for the whole word. Write a lowercase u and cross it out.</span></p>
       </section>
       <section className="about-section">
         <h2>How π becomes a word</h2>
