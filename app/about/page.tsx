@@ -1,3 +1,6 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import CodeLibrary from "@/components/CodeLibrary";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
@@ -12,7 +15,18 @@ import { piDecimalDigits } from "@/lib/pi";
 
 export const metadata: Metadata = { title: "About the word" };
 
-export default function About() {
+const examples = [
+  { language: "JavaScript", file: "codex.mjs", command: "node codex.mjs" },
+  { language: "Python", file: "codex.py", command: "python3 codex.py" },
+  { language: "Rust", file: "codex.rs", command: "rustc codex.rs -o codex && ./codex" },
+  { language: "C++", file: "codex.cpp", command: "c++ -std=c++17 codex.cpp -o codex && ./codex" },
+];
+
+export default async function About() {
+  const samples = await Promise.all(examples.map(async example => ({
+    ...example,
+    code: await readFile(path.join(process.cwd(), "examples", example.file), "utf8"),
+  })));
   const seed = piDecimalDigits(40).slice(0, 8);
   const pairs = seed.match(/../g) ?? [];
   return <>
@@ -23,6 +37,7 @@ export default function About() {
         <div><p className="kicker"><i aria-hidden="true" /> Rayo Codex</p><h1>About the word</h1></div>
         <ChapterTrace seed={seed} />
       </header>
+      <a className="text-button" href="#code-library">Explore the code library <ArrowDown /></a>
       <section className="about-origin">
         <h2>A word by David and Harvey</h2>
         <p>David and his son Harvey set out to invent the longest word they could imagine. They wanted to be able to say it out loud, even if they could only ever speak a small part of it.</p>
@@ -54,6 +69,7 @@ export default function About() {
         <p>Turn pages with the arrows or a swipe. Tap a verse to hear its phrases. Each chapter’s wireframe takes its shape from the four π pairs printed beneath it.</p>
         <a className="source-link" href="https://github.com/dulbrich/rayo-codex/blob/main/lib/codex.ts">View the syllable rules on GitHub <ArrowUpRight /></a>
       </section>
+      <CodeLibrary samples={samples} revision={process.env.VERCEL_GIT_COMMIT_SHA || "main"} />
     </main>
   </>;
 }
